@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
+import SubmitForm from "./../src/components/SubmitForm";
 
 export default function Submit() {
   return (
@@ -13,7 +14,7 @@ export default function Submit() {
       <div className="text-column">
         <h1>Submit a patent</h1>
 
-        <p>Here you can submit a patent</p>
+        <SubmitForm />
       </div>
     </>
   );
