@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import styles from "./SubmitForm.module.css";
+import DropArea from "../DropArea";
 
 export default function Layout() {
   const [title, setTitle] = useState("title");
@@ -64,6 +65,9 @@ export default function Layout() {
             value={description}
             onChange={handleDescriptionChange}
           />{" "}
+        </div>
+        <div>
+          <DropArea />
         </div>
         <button
           type="submit"
