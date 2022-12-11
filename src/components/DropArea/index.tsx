@@ -2,7 +2,8 @@ import { useState } from "react";
 import styles from "./DropArea.module.css";
 import StorageClient from "../../../utils/StorageClient";
 
-const DropArea = () => {
+const DropArea = (props: any) => {
+  const { currFiles, handleSetCurrFiles } = props;
   const [data, setData] = useState<ArrayBuffer | string | null | undefined>(
     null
   );
@@ -46,8 +47,9 @@ const DropArea = () => {
   };
 
   const uploadFile = async () => {
-    const URI = await new StorageClient().storeFiles(file);
-    console.log("Here uri currently is: ", URI[1]);
+    const newFile = await new StorageClient().storeFiles(file);
+    handleSetCurrFiles(newFile[0], newFile[1]);
+    setData(null);
   };
 
   return (
@@ -61,7 +63,7 @@ const DropArea = () => {
           <img className={styles.image} src={data?.toString()} />
         )}
         {data === null && (
-          <p className={styles.dropAreaText}>Drag and drop image</p>
+          <p className={styles.dropAreaText}>Drag and drop file</p>
         )}
       </div>
       {err && <p>Unable to upload image</p>}

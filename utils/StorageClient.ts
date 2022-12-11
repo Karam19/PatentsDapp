@@ -9,7 +9,6 @@ class StorageClient {
     });
   }
   public async storeFiles(file: any) {
-    console.log("Token is: ", process.env.NEXT_PUBLIC_WEB3_STORAGE_API_TOKEN);
     const ext = file.name.split(".").pop();
     const fileName = `${uuidv4()}.${ext}`;
     const newFile = new File([file], fileName, { type: file.type });
@@ -17,7 +16,6 @@ class StorageClient {
       name: fileName,
     });
     const imageURI = `https://${cid}.ipfs.dweb.link/${fileName}`;
-    console.log("Image url is: ", imageURI);
     return [fileName, imageURI];
   }
 }

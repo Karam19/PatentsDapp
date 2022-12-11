@@ -7,6 +7,18 @@ export default function Layout() {
   const [title, setTitle] = useState("title");
   const [keywords, setKeywords] = useState("keywords");
   const [description, setDescription] = useState("description");
+  const [currFiles, setCurrFiles] = useState<{ name: string; link: string }[]>(
+    []
+  );
+
+  function handleSetCurrFiles(newName: string, newLink: string) {
+    setCurrFiles(
+      currFiles.concat({
+        name: newName,
+        link: newLink,
+      })
+    );
+  }
 
   function handleTitleChange(event: any) {
     setTitle(event.target.value);
@@ -31,9 +43,7 @@ export default function Layout() {
   }
 
   async function uploadPatentWeb3() {
-    console.log("Title is: ", title);
-    console.log("Keywords are: ", keywords);
-    console.log("Description is: ", description);
+    
   }
 
   return (
@@ -67,7 +77,20 @@ export default function Layout() {
           />{" "}
         </div>
         <div>
-          <DropArea />
+          <label className={styles.label}>Files</label> <br></br>
+          <ul>
+            {currFiles.map((file) => (
+              <li>
+                <a href={file.link}>{file.name}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <DropArea
+            currFiles={currFiles}
+            handleSetCurrFiles={handleSetCurrFiles}
+          />
         </div>
         <button
           type="submit"
