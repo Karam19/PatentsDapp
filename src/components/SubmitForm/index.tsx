@@ -3,11 +3,9 @@ import { useState, useEffect } from "react";
 import styles from "./SubmitForm.module.css";
 
 export default function Layout() {
-  const [title, setTitle] = useState(0);
-  const [keywords, setKeywords] = useState("Please enter reciever's address");
-  const [description, setDescription] = useState(
-    "Please enter reciever's address"
-  );
+  const [title, setTitle] = useState("title");
+  const [keywords, setKeywords] = useState("keywords");
+  const [description, setDescription] = useState("description");
 
   function handleTitleChange(event: any) {
     setTitle(event.target.value);
@@ -21,7 +19,17 @@ export default function Layout() {
     setDescription(event.target.value);
   }
 
-  async function tokenTransfer() {
+  function handleSubmission() {
+    if (title.length === 0) {
+      alert("Title can't be empty");
+    } else if (description.length === 0) {
+      alert("Description can't be empty");
+    } else {
+      uploadPatentWeb3();
+    }
+  }
+
+  async function uploadPatentWeb3() {
     console.log("Title is: ", title);
     console.log("Keywords are: ", keywords);
     console.log("Description is: ", description);
@@ -57,7 +65,11 @@ export default function Layout() {
             onChange={handleDescriptionChange}
           />{" "}
         </div>
-        <button type="submit" className={styles.button} onClick={tokenTransfer}>
+        <button
+          type="submit"
+          className={styles.button}
+          onClick={handleSubmission}
+        >
           Submit
         </button>
       </div>
