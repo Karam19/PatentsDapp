@@ -66,7 +66,7 @@ const DropArea = (props: any) => {
           <p className={styles.dropAreaText}>Drag and drop file</p>
         )}
       </div>
-      {err && <p>Unable to upload image</p>}
+      {err && <p>Unable to upload file</p>}
       {data !== null && (
         <div>
           <button className={styles.deleteButton} onClick={() => setData(null)}>
