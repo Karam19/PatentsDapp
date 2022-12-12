@@ -1,9 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./SubmitForm.module.css";
 import DropArea from "../DropArea";
+import { useMoralis } from "react-moralis";
 
 export default function Layout() {
+  const { account } = useMoralis();
   const [title, setTitle] = useState("title");
   const [keywords, setKeywords] = useState("keywords");
   const [description, setDescription] = useState("description");
@@ -43,7 +45,15 @@ export default function Layout() {
   }
 
   async function uploadPatentWeb3() {
-    
+    const toUpload = {
+      Title: title,
+      Owner: account,
+      SubmissionDate: new Date().toLocaleDateString(),
+      Keywords: keywords,
+      Description: description,
+      Files: currFiles,
+    };
+    console.log(toUpload);
   }
 
   return (
