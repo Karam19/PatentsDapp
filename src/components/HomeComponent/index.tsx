@@ -7,7 +7,7 @@ import PatentCard from "../PatentCard";
 export default function HomeComponent() {
   const { chainId: chainIdHex, isWeb3Enabled, Moralis } = useMoralis();
   const chainId: string = parseInt(chainIdHex!).toString();
-  const [tokenId, setTokenId] = useState();
+  const [tokenId, setTokenId] = useState<number>(0);
   const options = {
     contractAddress: contractAddress,
     functionName: "tokenIds",
@@ -15,21 +15,22 @@ export default function HomeComponent() {
   };
   async function getTokenId() {
     const transaction: any = await Moralis.executeFunction(options);
-    console.log("Transaction is: ", parseInt(transaction._hex, 16));
+    return parseInt(transaction._hex, 16);
   }
   useEffect(() => {
-    
+    const fetchToken = async () => {
+      const _tokenId: any = await getTokenId();
+      setTokenId(_tokenId);
+    };
+    fetchToken().catch(console.error);
   }, []);
   return (
     <div>
-      {/* <button
-        onClick={async function () {
-          await getTokenId();
-        }}
-      ></button> */}
       {isWeb3Enabled ? (
         chainId === "5" ? (
-          <div>{<PatentCard tokenId={0} />}</div>
+          <div>
+            <PatentCard tokenId={tokenId} />
+          </div>
         ) : (
           <div className="text-column"> Please connect to Goerli network</div>
         )

@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from "./PatentCard.module.css";
-import DropArea from "../DropArea";
 import { useMoralis } from "react-moralis";
-import StorageClient from "../../../utils/StorageClient";
 import { abi, contractAddress } from "../../constants/contract";
 
 export default function PatentCard(props: { tokenId: number }) {
   const { tokenId } = props;
-  const { account, Moralis } = useMoralis();
+  const { Moralis } = useMoralis();
   const [url, setUrl] = useState(
     "https://bafybeieu5qyc6qmkmqg5pcx5r6lpyjofbmzis4zzv2krgadpcykuzld634.ipfs.dweb.link/c474fc01-5769-4db1-b808-1b563247ccc8.json"
   );
@@ -63,7 +61,7 @@ export default function PatentCard(props: { tokenId: number }) {
     };
     fetchStatus().catch(console.error);
     fetchData().catch(console.error);
-  }, []);
+  }, [tokenId]);
 
   return (
     <div className={styles.container}>
