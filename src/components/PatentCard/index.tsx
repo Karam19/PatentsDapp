@@ -43,6 +43,26 @@ export default function PatentCard(props: { tokenId: number }) {
     return response.json();
   }
 
+  async function getTokenUri() {
+    const options = {
+      contractAddress: contractAddress,
+      functionName: "tokenURI",
+      abi: abi,
+      params: {
+        tokenId: tokenId,
+      },
+    };
+    const transaction: any = await Moralis.executeFunction(options);
+    setUrl(transaction);
+  }
+
+  useEffect(() => {
+    const fetchurl = async () => {
+      await getTokenUri();
+    };
+    fetchurl().catch(console.error);
+  }, [tokenId]);
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await getJsonFile(url);
@@ -61,7 +81,7 @@ export default function PatentCard(props: { tokenId: number }) {
     };
     fetchStatus().catch(console.error);
     fetchData().catch(console.error);
-  }, [tokenId]);
+  }, [url]);
 
   return (
     <div className={styles.container}>
