@@ -75,12 +75,6 @@ export default function Layout() {
       },
     };
     const transaction = await Moralis.executeFunction(sendOptions);
-    return transaction;
-  }
-
-  async function uploadPatentWeb3() {
-    const tempWeb3URI = await getSubmissionObject();
-    const transaction = await submitPatentToContract(tempWeb3URI);
     alert(
       `Your contract was submitted successfully!\nYou'r token Id is ${parseInt(
         transaction.hash._hex,
@@ -88,6 +82,11 @@ export default function Layout() {
       )} , use it to track the status of your patent.`
     );
     console.log(transaction);
+  }
+
+  async function uploadPatentWeb3() {
+    const tempWeb3URI = await getSubmissionObject();
+    await submitPatentToContract(tempWeb3URI);
   }
 
   return (

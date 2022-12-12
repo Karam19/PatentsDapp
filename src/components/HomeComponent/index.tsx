@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { abi, contractAddress } from "../../constants/contract";
 import { useMoralis } from "react-moralis";
 import { useState } from "react";
@@ -9,13 +10,16 @@ export default function HomeComponent() {
   const [tokenId, setTokenId] = useState();
   const options = {
     contractAddress: contractAddress,
-    functionName: "_tokenIds",
+    functionName: "tokenIds",
     abi: abi,
   };
   async function getTokenId() {
     const transaction: any = await Moralis.executeFunction(options);
     console.log("Transaction is: ", parseInt(transaction._hex, 16));
   }
+  useEffect(() => {
+    
+  }, []);
   return (
     <div>
       {/* <button
@@ -25,9 +29,7 @@ export default function HomeComponent() {
       ></button> */}
       {isWeb3Enabled ? (
         chainId === "5" ? (
-          <div>
-            <PatentCard />
-          </div>
+          <div>{<PatentCard tokenId={0} />}</div>
         ) : (
           <div className="text-column"> Please connect to Goerli network</div>
         )
