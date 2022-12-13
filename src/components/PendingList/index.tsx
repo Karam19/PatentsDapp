@@ -51,16 +51,6 @@ export default function PendingComponent(props: {
     }
   }
 
-  //   useEffect(() => {
-  //     console.log("Let us use effect");
-  //     setPendingPatents([]);
-  //     const fetchStatus = async () => {
-  //       await getAlltokensStatus();
-  //     };
-  //     fetchStatus().catch(console.error);
-  //     console.log("Fetched status");
-  //   }, []);
-
   async function handleButtonClick() {
     setPendingPatents([]);
     await getAlltokensStatus();

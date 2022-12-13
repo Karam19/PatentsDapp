@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { abi, contractAddress } from "../../constants/contract";
 import { useMoralis } from "react-moralis";
 import { useState } from "react";
-import PatentCard from "../PatentCard";
+import ReviewPatentCard from "../ReviewPatentCard";
 import styles from "./SearchComponent.module.css";
 import PendingList from "../PendingList";
 
@@ -98,7 +98,10 @@ export default function SearchComponent() {
       ) : (
         <div className="text-column">
           {" "}
-          <PatentCard tokenId={Number(searchId)} />{" "}
+          <ReviewPatentCard
+            tokenId={Number(searchId)}
+            isReviewer={isReviewer}
+          />{" "}
         </div>
       )}
     </div>
