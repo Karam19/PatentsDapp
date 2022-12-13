@@ -37,7 +37,7 @@ export default function Header() {
             }
           >
             <Link className={styles.a} href="/submit">
-            Submit
+              Submit
             </Link>
           </li>
           <li
@@ -46,7 +46,7 @@ export default function Header() {
             }
           >
             <Link className={styles.a} href="/review">
-              Review
+              Add reviewer
             </Link>
           </li>
           <li

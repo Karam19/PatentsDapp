@@ -8,8 +8,8 @@ export default function Review() {
   return (
     <>
       <Head>
-        <title>Review</title>
-        <meta name="description" content="Review a patent" />
+        <title>Add a reviewer</title>
+        <meta name="description" content="Add a reviewer" />
       </Head>
 
       <div className="text-column">
