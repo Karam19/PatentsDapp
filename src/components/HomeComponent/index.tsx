@@ -23,7 +23,7 @@ export default function HomeComponent() {
       setTokenId(_tokenId);
     };
     fetchToken().catch(console.error);
-  }, []);
+  }, [isWeb3Enabled]);
   return (
     <div>
       {isWeb3Enabled ? (
