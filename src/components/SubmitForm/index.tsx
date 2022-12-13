@@ -55,13 +55,13 @@ export default function Layout() {
       Description: description,
       Files: currFiles,
     };
-    console.log(toUpload);
+    // console.log(toUpload);
     const blobFile = new Blob([JSON.stringify(toUpload)], {
       type: "application/json",
     });
     const file = new File([blobFile], "hello.json");
     const submitFile = await new StorageClient().storeFiles(file);
-    console.log("Submit file is: ", submitFile);
+    // console.log("Submit file is: ", submitFile);
     return submitFile[1];
   }
 
@@ -75,12 +75,7 @@ export default function Layout() {
       },
     };
     const transaction = await Moralis.executeFunction(sendOptions);
-    alert(
-      `Your contract was submitted successfully!\nYou'r token Id is ${parseInt(
-        transaction.hash._hex,
-        16
-      )} , use it to track the status of your patent.`
-    );
+    alert(`Your contract was submitted successfully!\n.`);
     console.log(transaction);
   }
 

@@ -6,7 +6,6 @@ import { abi, contractAddress } from "../../constants/contract";
 
 export default function PatentCard(props: { tokenId: number }) {
   const { tokenId } = props;
-  console.log("Token Id is: ", tokenId);
   const { Moralis } = useMoralis();
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("Loading ...");
@@ -73,7 +72,6 @@ export default function PatentCard(props: { tokenId: number }) {
         setDescription(data.Description);
         setFiles(data.Files);
       }
-      console.log(data);
     };
     const fetchStatus = async () => {
       await getTokenStatus();

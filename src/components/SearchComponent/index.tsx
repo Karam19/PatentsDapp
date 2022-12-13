@@ -4,6 +4,7 @@ import { useMoralis } from "react-moralis";
 import { useState } from "react";
 import PatentCard from "../PatentCard";
 import styles from "./SearchComponent.module.css";
+import PendingList from "../PendingList";
 
 export default function SearchComponent() {
   const { account, Moralis } = useMoralis();
@@ -32,11 +33,11 @@ export default function SearchComponent() {
       },
     };
     const transaction: any = await Moralis.executeFunction(options);
-    console.log("Is reviewer equals to: ", transaction);
     return transaction;
   }
 
   useEffect(() => {
+    console.log("Let us use effect");
     const fetchToken = async () => {
       const _tokenId: any = await getTokenId();
       setTokenId(_tokenId);
@@ -46,8 +47,10 @@ export default function SearchComponent() {
       setIsReviewer(_isReviewer);
     };
     fetchReviewer().catch(console.error);
+    console.log("Fetched reviewer");
     fetchToken().catch(console.error);
-  }, []);
+    console.log("Fetched token");
+  }, [account]);
 
   function handleSearchIdChange(event: any) {
     const valueToSearch = event.target.value;
@@ -63,11 +66,9 @@ export default function SearchComponent() {
     <div>
       <div className={styles.mainContrainer}>
         {isReviewer ? (
-          <div className={styles.labelreview}>You are a reviewer</div>
+          <PendingList tokenId={tokenId} isReviewer={isReviewer} />
         ) : (
-          <div className={styles.labelreview}>
-            You don't have a review access
-          </div>
+          <div></div>
         )}
         {tokenId === 0 ? (
           <div>Loading ... </div>
