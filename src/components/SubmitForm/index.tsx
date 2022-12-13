@@ -55,13 +55,11 @@ export default function Layout() {
       Description: description,
       Files: currFiles,
     };
-    // console.log(toUpload);
     const blobFile = new Blob([JSON.stringify(toUpload)], {
       type: "application/json",
     });
     const file = new File([blobFile], "hello.json");
     const submitFile = await new StorageClient().storeFiles(file);
-    // console.log("Submit file is: ", submitFile);
     return submitFile[1];
   }
 

@@ -14,7 +14,6 @@ export default function PendingComponent(props: {
   const [shown, setShown] = useState<boolean>(false);
 
   async function getTokenStatus(_tokenId: any) {
-    console.log("we get for id: ", _tokenId);
     const options = {
       contractAddress: contractAddress,
       functionName: "patentStatus",
@@ -25,27 +24,18 @@ export default function PendingComponent(props: {
     };
     const transaction: any = await Moralis.executeFunction(options);
     const digitStatus = parseInt(transaction._hex, 16);
-    console.log("For token number ", _tokenId, "Status is: ", digitStatus);
     if (digitStatus === 0) {
-      console.log("existance", !pendingPatents.includes(_tokenId));
       if (!pendingPatents.includes(_tokenId)) {
         const tempPatents = pendingPatents;
         tempPatents.push(_tokenId);
         setPendingPatents(tempPatents);
       }
     }
-    console.log(
-      "For token number ",
-      _tokenId,
-      "  pending patent is: ",
-      pendingPatents
-    );
   }
 
   async function getAlltokensStatus() {
     if (tokenId !== 0) {
       for (let i = 0; i < tokenId; i++) {
-        console.log("i is ", i);
         await getTokenStatus(i);
       }
     }

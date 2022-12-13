@@ -25,26 +25,22 @@ contract Patents is ERC721URIStorage {
     false ===> Isn't a reviewer
     */
     mapping(address => bool) public isReviewer;
-    
 
-    modifier onlyOwner {
-        require(msg.sender == owner,"Sender not authorized");
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Sender not authorized");
         _;
-   }
-    modifier onlyReviewer {
-        require(isReviewer[msg.sender],"Sender is not a reviewer");
+    }
+    modifier onlyReviewer() {
+        require(isReviewer[msg.sender], "Sender is not a reviewer");
         _;
-   }
+    }
 
     constructor() ERC721("PatentItem", "PTM") {
         owner = msg.sender;
         isReviewer[owner] = true;
     }
 
-    function submitPatent(string memory tokenURI)
-        public
-        returns (uint256)
-    {
+    function submitPatent(string memory tokenURI) public returns (uint256) {
         uint256 newItemId = tokenIds.current();
         _mint(msg.sender, newItemId);
         _setTokenURI(newItemId, tokenURI);
@@ -54,35 +50,27 @@ contract Patents is ERC721URIStorage {
         return newItemId;
     }
 
-    function grantReviewPermission(address newReviewer)
-    public
-    onlyOwner
-    {
+    function grantReviewPermission(address newReviewer) public onlyOwner {
         isReviewer[newReviewer] = true;
     }
 
-    function reviewPatent(uint256 patentId, bool decision)
-    public
-    onlyReviewer {
-        if (decision == true){
+    function reviewPatent(uint256 patentId, bool decision) public onlyReviewer {
+        if (decision == true) {
             status[patentId] = 1;
-        }
-        else {
+        } else {
             status[patentId] = 2;
         }
     }
-    function patentStatus(uint256 patentId)
-    public
-    view
-    returns (uint256)
-    {
+
+    function patentStatus(uint256 patentId) public view returns (uint256) {
         return status[patentId];
     }
-    function isUserReviewer(address addr)
-    public
-    view
-    returns (bool)
-    {
+
+    function isUserReviewer(address addr) public view returns (bool) {
         return isReviewer[addr];
+    }
+
+    function isUserOwner(address addr) public view returns (bool) {
+        return addr == owner;
     }
 }

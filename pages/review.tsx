@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import { useMoralis } from "react-moralis";
+import AddReviewer from "../src/components/AddReviewer";
 
 export default function Review() {
   const { chainId: chainIdHex, isWeb3Enabled } = useMoralis();
@@ -15,10 +16,7 @@ export default function Review() {
       <div className="text-column">
         {isWeb3Enabled ? (
           chainId === "5" ? (
-            <div>
-              <h1>Review a patent</h1>
-              <p>Here you can review a patent</p>
-            </div>
+            <AddReviewer />
           ) : (
             <div className="text-column"> Please connect to Goerli network</div>
           )

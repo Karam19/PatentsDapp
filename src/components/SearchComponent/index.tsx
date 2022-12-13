@@ -26,7 +26,7 @@ export default function SearchComponent() {
   async function getIfReviewer() {
     const options = {
       contractAddress: contractAddress,
-      functionName: "isuserReviewer",
+      functionName: "isUserReviewer",
       abi: abi,
       params: {
         addr: account,
@@ -37,7 +37,6 @@ export default function SearchComponent() {
   }
 
   useEffect(() => {
-    console.log("Let us use effect");
     const fetchToken = async () => {
       const _tokenId: any = await getTokenId();
       setTokenId(_tokenId);
@@ -47,9 +46,7 @@ export default function SearchComponent() {
       setIsReviewer(_isReviewer);
     };
     fetchReviewer().catch(console.error);
-    console.log("Fetched reviewer");
     fetchToken().catch(console.error);
-    console.log("Fetched token");
   }, [account]);
 
   function handleSearchIdChange(event: any) {

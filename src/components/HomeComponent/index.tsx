@@ -20,7 +20,6 @@ export default function HomeComponent() {
   useEffect(() => {
     const fetchToken = async () => {
       const _tokenId: any = await getTokenId();
-      // console.log("Loaded from the chain a token id is: ", _tokenId);
       setTokenId(_tokenId);
     };
     fetchToken().catch(console.error);
