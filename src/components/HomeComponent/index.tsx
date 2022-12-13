@@ -20,6 +20,7 @@ export default function HomeComponent() {
   useEffect(() => {
     const fetchToken = async () => {
       const _tokenId: any = await getTokenId();
+      console.log("Loaded from the chain a token id is: ", _tokenId);
       setTokenId(_tokenId);
     };
     fetchToken().catch(console.error);
@@ -28,9 +29,13 @@ export default function HomeComponent() {
     <div>
       {isWeb3Enabled ? (
         chainId === "5" ? (
-          <div>
-            <PatentCard tokenId={tokenId} />
-          </div>
+          tokenId === 0 ? (
+            <div>Loading Patent card ... </div>
+          ) : (
+            <div>
+              <PatentCard tokenId={tokenId - 1} />
+            </div>
+          )
         ) : (
           <div className="text-column"> Please connect to Goerli network</div>
         )

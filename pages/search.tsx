@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useMoralis } from "react-moralis";
 import React from "react";
+import SearchComponent from "./../src/components/SearchComponent";
 
 export default function Search() {
   const { chainId: chainIdHex, isWeb3Enabled } = useMoralis();
@@ -16,9 +17,7 @@ export default function Search() {
         {isWeb3Enabled ? (
           chainId === "5" ? (
             <div>
-              <h1>Search for a patent</h1>
-
-              <p>Here you can search for a patent</p>
+              <SearchComponent />
             </div>
           ) : (
             <div className="text-column"> Please connect to Goerli network</div>

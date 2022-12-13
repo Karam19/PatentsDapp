@@ -6,10 +6,9 @@ import { abi, contractAddress } from "../../constants/contract";
 
 export default function PatentCard(props: { tokenId: number }) {
   const { tokenId } = props;
+  console.log("Token Id is: ", tokenId);
   const { Moralis } = useMoralis();
-  const [url, setUrl] = useState(
-    "https://bafybeieu5qyc6qmkmqg5pcx5r6lpyjofbmzis4zzv2krgadpcykuzld634.ipfs.dweb.link/c474fc01-5769-4db1-b808-1b563247ccc8.json"
-  );
+  const [url, setUrl] = useState("");
   const [title, setTitle] = useState("Loading ...");
   const [status, setStatus] = useState("Loading ...");
   const [owner, setOwner] = useState("Loading ...");
